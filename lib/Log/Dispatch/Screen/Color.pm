@@ -8,6 +8,7 @@ use Params::Validate qw(validate HASHREF);
 Params::Validate::validation_options( allow_extra => 1 );
 
 use Term::ANSIColor ();
+require Win32::Console::ANSI if $^O eq 'MSWin32';
 
 our $DEFAULT_COLOR = {
     debug => {},
@@ -153,6 +154,8 @@ Log::Dispatch::Screen::Color - attached color for Log::Dispatch::Screen
 
 Log::Dispatch::Screen::Color is attaching a color safely for Screen. because L<Log::Dispatch::Colorful> has rewrite L<Log::Dispatch> method problem.
 
+Win32 is supported.
+
 =head1 OVERRIDES
 
 Setting $Log::Dispatch::Screen::Color::DEFAULT_COLOR overrides. default color is changed.
@@ -160,10 +163,6 @@ Setting $Log::Dispatch::Screen::Color::DEFAULT_COLOR overrides. default color is
   local $Log::Dispatch::Screen::Color::DEFAULT_COLOR->{info} = {
     text => 'red',
   };
-
-=head1 TODO
-
-for win32
 
 =head1 AUTHOR
 

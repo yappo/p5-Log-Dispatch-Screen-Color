@@ -5,6 +5,7 @@ all_from 'lib/Log/Dispatch/Screen/Color.pm';
 requires 'Log::Dispatch';
 requires 'Term::ANSIColor';
 requires 'Params::Validate';
+requires 'Win32::Console::ANSI' if $^O eq 'MSWin32';
 
 tests 't/*.t';
 author_tests 'xt';
