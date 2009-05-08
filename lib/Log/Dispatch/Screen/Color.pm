@@ -9,7 +9,7 @@ Params::Validate::validation_options( allow_extra => 1 );
 
 use Term::ANSIColor ();
 
-my $DEFAULT_COLOR = {
+our $DEFAULT_COLOR = {
     debug => {},
     info  => {
         text       => 'blue',
@@ -152,6 +152,14 @@ Log::Dispatch::Screen::Color - attached color for Log::Dispatch::Screen
 =head1 DESCRIPTION
 
 Log::Dispatch::Screen::Color is attaching a color safely for Screen. because L<Log::Dispatch::Colorful> has rewrite L<Log::Dispatch> method problem.
+
+=head1 OVERRIDES
+
+Setting $Log::Dispatch::Screen::Color::DEFAULT_COLOR overrides. default color is changed.
+
+  local $Log::Dispatch::Screen::Color::DEFAULT_COLOR->{info} = {
+    text => 'red',
+  };
 
 =head1 TODO
 
