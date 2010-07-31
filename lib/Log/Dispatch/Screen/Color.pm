@@ -4,7 +4,7 @@ use warnings;
 use base 'Log::Dispatch::Screen';
 our $VERSION = '0.03';
 
-use Params::Validate qw(validate HASHREF);
+use Params::Validate qw(validate HASHREF BOOLEAN);
 Params::Validate::validation_options( allow_extra => 1 );
 
 use Term::ANSIColor ();
@@ -58,6 +58,11 @@ sub new {
             optional => 1,
             default  => +{},
         },
+        newline => {
+            type => BOOLEAN,
+            optional => 1,
+            default => 0,
+        },
     });
 
     # generate color table
@@ -75,6 +80,11 @@ sub new {
     # inject color callback
     my @callbacks      = $self->_get_callbacks(%p);
     $self->{callbacks} = [ sub { $self->colored(@_) }, @callbacks ];
+
+    # newline
+    if ($p{newline}) {
+        push @{$self->{callbacks}}, \&_add_newline_callback;
+    }
 
     $self;
 }
@@ -104,6 +114,12 @@ sub colored {
 
     return $message;
 }
+
+sub _add_newline_callback {
+    my %p = @_;
+    return $p{message} . "\n";
+}
+
 
 1;
 __END__
@@ -155,6 +171,9 @@ Log::Dispatch::Screen::Color - attached color for Log::Dispatch::Screen
 Log::Dispatch::Screen::Color is attaching a color safely for Screen. because L<Log::Dispatch::Colorful> has rewrite L<Log::Dispatch> method problem.
 
 Win32 is supported.
+
+Note that a newline will I<not> be added automatically at the end of a
+message by default.  To do that, pass C<newline =E<gt> 1>.
 
 =head1 OVERRIDES
 
