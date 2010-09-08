@@ -2,7 +2,7 @@ package Log::Dispatch::Screen::Color;
 use strict;
 use warnings;
 use base 'Log::Dispatch::Screen';
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use Params::Validate qw(validate HASHREF BOOLEAN);
 Params::Validate::validation_options( allow_extra => 1 );

@@ -1,5 +1,8 @@
 Revision history for Perl extension Log::Dispatch::Screen::Color
 
+0.04    2010-09-08T12:06:20+09:00
+	= added 'newline' option (tokuhirom)
+
 0.03    2009-05-08T14:34:15+09:00
         - Win32 is supported # charsbar++
 
