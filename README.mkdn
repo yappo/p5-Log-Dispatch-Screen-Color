@@ -1,0 +1,69 @@
+# NAME
+
+Log::Dispatch::Screen::Color - attached color for Log::Dispatch::Screen
+
+# SYNOPSIS
+
+  use Log::Dispatch::Screen::Color;
+
+  my $log = Log::Dispatch::Screen::Color->new(
+      name      => 'test',
+      min_level => 'debug',
+      stderr    => 1,
+  );
+
+  # not use default color map
+  my $log = Log::Dispatch::Screen::Color->new(
+      name      => 'test',
+      min_level => 'debug',
+      stderr    => 1,
+      color     => {
+          info  => {
+              text => 'red',
+          },
+          error   => {
+              background => 'red',
+          },
+          alert   => {
+              text       => 'red',
+              background => 'white',
+          },
+          warning => {
+              text       => 'red',
+              background => 'white',
+              bold       => 1,
+          },
+      },
+  );
+
+  $log->log( level => 'info', message => "I like wasabi!\n" );
+
+# DESCRIPTION
+
+Log::Dispatch::Screen::Color is attaching a color safely for Screen. because [Log::Dispatch::Colorful](http://search.cpan.org/perldoc?Log::Dispatch::Colorful) has rewrite [Log::Dispatch](http://search.cpan.org/perldoc?Log::Dispatch) method problem.
+
+Win32 is supported.
+
+Note that a newline will _not_ be added automatically at the end of a
+message by default.  To do that, pass `newline => 1`.
+
+# OVERRIDES
+
+Setting $Log::Dispatch::Screen::Color::DEFAULT_COLOR overrides. default color is changed.
+
+  local $Log::Dispatch::Screen::Color::DEFAULT_COLOR->{info} = {
+    text => 'red',
+  };
+
+# AUTHOR
+
+Kazuhiro Osawa <yappo <at> shibuya <döt> pl>
+
+# SEE ALSO
+
+[Log::Dispatch](http://search.cpan.org/perldoc?Log::Dispatch), [Log::Dispatch::Screen](http://search.cpan.org/perldoc?Log::Dispatch::Screen)
+
+# LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.

@@ -17,5 +17,8 @@
 ^[^/]+\.yaml$
 ^[^/]+\.pl$
 ^\.shipit$
-^\.git
-^test\.pl$
+^\.git/
+\.gitignore
+\.sw[po]$
+^MYMETA\.yml$
+MYMETA.json

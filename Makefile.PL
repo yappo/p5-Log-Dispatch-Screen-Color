@@ -1,6 +1,9 @@
 use inc::Module::Install;
 name 'Log-Dispatch-Screen-Color';
 all_from 'lib/Log/Dispatch/Screen/Color.pm';
+readme_from 'lib/Log/Dispatch/Screen/Color.pm';
+readme_markdown_from 'lib/Log/Dispatch/Screen/Color.pm';
+githubmeta;
 
 requires 'Log::Dispatch';
 requires 'Term::ANSIColor';
@@ -12,7 +15,6 @@ author_tests 'xt';
 
 build_requires 'Test::More';
 build_requires 'IO::Scalar';
-use_test_base;
-auto_include;
+
 auto_set_repository;
 WriteAll;

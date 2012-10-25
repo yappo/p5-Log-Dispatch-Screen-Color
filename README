@@ -1,27 +1,66 @@
-This is Perl module Log::Dispatch::Screen::Color.
+NAME
+    Log::Dispatch::Screen::Color - attached color for Log::Dispatch::Screen
 
-INSTALLATION
+SYNOPSIS
+      use Log::Dispatch::Screen::Color;
 
-Log::Dispatch::Screen::Color installation is straightforward. If your CPAN shell is set up,
-you should just be able to do
+      my $log = Log::Dispatch::Screen::Color->new(
+          name      => 'test',
+          min_level => 'debug',
+          stderr    => 1,
+      );
 
-    % cpan Log::Dispatch::Screen::Color
+      # not use default color map
+      my $log = Log::Dispatch::Screen::Color->new(
+          name      => 'test',
+          min_level => 'debug',
+          stderr    => 1,
+          color     => {
+              info  => {
+                  text => 'red',
+              },
+              error   => {
+                  background => 'red',
+              },
+              alert   => {
+                  text       => 'red',
+                  background => 'white',
+              },
+              warning => {
+                  text       => 'red',
+                  background => 'white',
+                  bold       => 1,
+              },
+          },
+      );
 
-Download it, unpack it, then build it as per the usual:
+      $log->log( level => 'info', message => "I like wasabi!\n" );
 
-    % perl Makefile.PL
-    % make && make test
+DESCRIPTION
+    Log::Dispatch::Screen::Color is attaching a color safely for Screen.
+    because Log::Dispatch::Colorful has rewrite Log::Dispatch method
+    problem.
 
-Then install it:
+    Win32 is supported.
 
-    % make install
+    Note that a newline will *not* be added automatically at the end of a
+    message by default. To do that, pass "newline => 1".
 
-DOCUMENTATION
+OVERRIDES
+    Setting $Log::Dispatch::Screen::Color::DEFAULT_COLOR overrides. default
+    color is changed.
 
-Log::Dispatch::Screen::Color documentation is available as in POD. So you can do:
+      local $Log::Dispatch::Screen::Color::DEFAULT_COLOR->{info} = {
+        text => 'red',
+      };
 
-    % perldoc Log::Dispatch::Screen::Color
+AUTHOR
+    Kazuhiro Osawa <yappo <at> shibuya <döt> pl>
 
-to read the documentation online with your favorite pager.
+SEE ALSO
+    Log::Dispatch, Log::Dispatch::Screen
 
-Kazuhiro Osawa
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
